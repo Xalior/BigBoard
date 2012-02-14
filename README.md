@@ -1,3 +1,10 @@
+BigBoard CI display
+======================
+
+by [Spot Specific](http://www.spotspecific.com)
+
+A fork of the excellent [Buildiator](https://github.com/JakeWorrell/buildiator) by [Jake Worrell](http://jakeworrell.co.uk/buildiator-continuous-integration-radiator-view/).
+
 Set Up Instructions
 ===================
 
