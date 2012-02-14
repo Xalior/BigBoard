@@ -3,6 +3,7 @@
  * Handles communication with a JenkinsCI server
  *
  * @author Jake Worrell (jakeworrell.co.uk)
+ * @author Spot Specific (http://www.spotspecific.com)
  */
 
 require_once 'base/ContinuousIntegrationServerInterface.php';
@@ -26,7 +27,7 @@ class JenkinsCI implements ContinuousIntegrationServerInterface{
 	public function getAllJobs() {
 		$json = @file_get_contents($this->url . $this->view .'/api/json?tree=jobs[name,color]');
 		if (!$json) {
-			throw new BuildiatorCIServerCommunicationException ("Error getting build data from Jenkins server at {$this->url}");
+			throw new BigBoardCIServerCommunicationException ("Error getting build data from Jenkins server at {$this->url}");
 		}
 		$jobs = json_decode($json);
 		foreach ($jobs->jobs as $job) {

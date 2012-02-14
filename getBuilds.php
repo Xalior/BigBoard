@@ -12,7 +12,7 @@ if (isset($_GET['view'])) {
 
 try {
 	$jobs = $ci->getAllJobs();
-} catch (BuildiatorCIServerCommunicationException $e) {
+} catch (BigBoardCIServerCommunicationException $e) {
 	$result = array('status'  => 'error',
 					'content' => $e->getMessage());
 }

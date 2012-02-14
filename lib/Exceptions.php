@@ -1,12 +1,12 @@
 <?php
 /**
- * Base exception for all Buildiator exceptions.
+ * Base exception for all BigBoard exceptions.
  */
-class BuildiatorException extends Exception {};
+class BigBoardException extends Exception {};
 
 /**
  * Thrown when there is an error communicating with the CI Server
  */
-class BuildiatorCIServerCommunicationException extends BuildiatorException {};
+class BigBoardCIServerCommunicationException extends BigBoardException {};
 
 ?>

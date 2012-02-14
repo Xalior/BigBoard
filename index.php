@@ -10,7 +10,7 @@
 			}
 		?>
 
-		<title>buildiator</title>
+		<title>BigBoard</title>
 	</head>
 	<body>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
