@@ -58,9 +58,8 @@ ul {
 
 .successful {
 	border: solid 1px #0076a3;
-	background: #0095cd;
-	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
-	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+	background: -moz-linear-gradient(top, #16ee00 0%, #008215 100%) #37cd00;
+	background: -webkit-gradient(linear, left top, left bottom, from(#16ee00), to(#008215)) #37cd00;
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
 }
 
