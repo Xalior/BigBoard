@@ -1,15 +1,12 @@
 <?php
 /**
- * Handles communication with a JenkinsCI server
+ * Handles communication with a Jenkins server
  *
  * @author Jake Worrell (jakeworrell.co.uk)
  * @author Spot Specific (http://www.spotspecific.com)
  */
 
-require_once 'base/ContinuousIntegrationServerInterface.php';
-require_once 'lib/Exceptions.php';
-
-class JenkinsCI implements ContinuousIntegrationServerInterface{
+class Jenkins extends BigBoardBaseModule {
 	private $url;
 
 	function __construct($url = null, $view = null) {
@@ -22,12 +19,13 @@ class JenkinsCI implements ContinuousIntegrationServerInterface{
 		} else {
 			$this->view = '';
 		}
+        $this->hash = md5($this->url);
 	}
 
 	public function getAllJobs() {
 		$json = @file_get_contents($this->url . $this->view .'/api/json?tree=jobs[name,color]');
 		if (!$json) {
-			throw new BigBoardCIServerCommunicationException ("Error getting build data from Jenkins server at {$this->url}");
+			throw new BigBoardModuleCommunicationException ("Error getting build data from Jenkins server at {$this->url}");
 		}
 		$jobs = json_decode($json);
 		foreach ($jobs->jobs as $job) {
@@ -51,6 +49,31 @@ class JenkinsCI implements ContinuousIntegrationServerInterface{
 		return $culprits->culprits[0]->fullName;
 
 	}
+
+    public function xhr() {
+        $result = '';
+        try {
+            $jobs = $this->getAllJobs();
+        } catch (BigBoardCIServerCommunicationException $e) {
+            $result = array('status'  => 'error',
+                            'content' => $e->getMessage());
+        }
+
+        if (!is_array($result)) {
+            $html = '';
+            foreach ($jobs as $job) {
+            $blame = null;
+            if ($job['status'][0] == 'failed') {
+                $blame = "<br /><span class='blame'>{$job['blame']}</span>" ;
+            }
+            $html .="<li class = 'job " . implode(" ",$job['status'] ) . "'>{$job['name']}{$blame}</li>";
+        }
+
+        $result = array('status'  => 'ok',
+                        'content' => $html);
+        }
+        return $result;
+    }
 
 	private function translateColorToStatus($color) {
 		switch($color){

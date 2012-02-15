@@ -1,13 +1,11 @@
 <?php
 
-require_once 'base/ContinuousIntegrationServerInterface.php';
-
 /**
- * A Mock CI for testing the visual stuff without a CI Server
+ * A Static HTML output module for simple inline markup
  *
- * @author Jake Worrell (jakeworrell.co.uk)
+ * @author D. Rimron (xalior.com)
  */
-class MockCI {
+class StaticHTML {
 	public function getAllJobs() {
 		$return = array(
 			array(
